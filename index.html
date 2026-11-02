@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusConecta | Red social universitaria</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="campusconecta-logo.png">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="CampusConecta inicio"><img class="brand-logo" src="campusconecta-logo.png" alt="Logo CampusConecta"> <span>CampusConecta</span></a>
+    <nav id="mainNav" class="hidden">
+      <button class="nav-btn active" data-view="feedView">Inicio</button>
+      <button class="nav-btn" data-view="groupsView">Grupos</button>
+      <button class="nav-btn" data-view="notificationsView">Notificaciones <span id="notificationBadge" class="notification-badge hidden">0</span></button>
+      <button class="nav-btn" data-view="messagesView">Mensajes</button>
+      <button class="nav-btn" data-view="studentsView">Estudiantes</button>
+      <button class="nav-btn" data-view="calendarView">Calendario</button>
+      <button class="nav-btn" data-view="savedView">♡ Guardados</button>
+      <button class="nav-btn" data-view="historyView">Mi historial</button>
+      <button class="nav-btn" data-view="profileView">Mi perfil</button>
+      <button class="nav-btn admin-nav hidden" data-view="adminView">Administración</button>
+    </nav>
+    <div id="userBadge" class="user-badge hidden"></div>
+    <button id="logoutBtn" class="btn btn-outline hidden">Cerrar sesión</button>
+  </header>
+
+  <main>
+    <section id="welcomeView" class="welcome">
+      <div class="hero-copy">
+        <span class="eyebrow">TU CAMPUS, MÁS CONECTADO</span>
+        <h1>Aprender es mejor<br><span>en comunidad.</span></h1>
+        <p>Comparte apuntes, resuelve dudas y conecta con estudiantes de tu universidad en un espacio creado para aprender juntos.</p>
+        <div class="hero-points">
+          <div><span class="point-icon">✓</span> Comparte recursos académicos</div>
+          <div><span class="point-icon">✓</span> Pregunta y ayuda a otros</div>
+          <div><span class="point-icon">✓</span> Únete a grupos por carrera</div>
+        </div>
+      </div>
+      <div class="auth-card">
+        <div class="tabs">
+          <button class="tab active" data-auth="loginForm">Iniciar sesión</button>
+          <button class="tab" data-auth="registerForm">Crear cuenta</button>
+        </div>
+        <form id="loginForm" class="auth-form">
+          <h2>¡Qué gusto verte!</h2><p class="muted">Ingresa a tu comunidad universitaria.</p>
+          <label for="loginUser">Usuario</label><input id="loginUser" required autocomplete="username" placeholder="Tu usuario">
+          <label for="loginPass">Contraseña</label><input id="loginPass" type="password" required autocomplete="current-password" placeholder="Tu contraseña">
+          <button class="btn btn-primary full" type="submit">Entrar a CampusConecta</button>
+          <p class="hint">Cuenta de prueba: <b>admin</b> / contraseña <b>2026</b></p>
+          <p id="loginMessage" class="form-message" aria-live="polite"></p>
+        </form>
+        <form id="registerForm" class="auth-form hidden">
+          <h2>Únete a la comunidad</h2><p class="muted">Crea tu perfil universitario.</p>
+          <label for="regName">Nombre completo</label><input id="regName" required maxlength="70" placeholder="Ej. Ana López">
+          <label for="regUser">Nombre de usuario</label><input id="regUser" required minlength="3" maxlength="24" pattern="[A-Za-z0-9_]+" placeholder="ana_lopez">
+          <label for="regEmail">Correo electrónico</label><input id="regEmail" type="email" required placeholder="ana@universidad.edu">
+          <label for="regCareer">Carrera</label>
+          <select id="regCareer" required><option value="">Selecciona tu carrera</option><option>Administración</option><option>Ingeniería en Sistemas</option><option>Psicología</option><option>Derecho</option><option>Arquitectura</option><option>Otra</option></select>
+          <label for="regBio">Descripción de perfil</label><textarea id="regBio" maxlength="180" rows="2" placeholder="¿Qué estudias o qué temas te interesan?"></textarea>
+          <label for="regPass">Contraseña</label><input id="regPass" type="password" minlength="4" required placeholder="Mínimo 4 caracteres">
+          <button class="btn btn-primary full" type="submit">Crear mi cuenta</button>
+          <p id="registerMessage" class="form-message" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="registrationSummary" class="summary-card hidden">
+      <div class="success-icon">✓</div><div><h2>¡Registro completado!</h2><p>Revisa tus datos antes de entrar a la red social.</p><div id="summaryDetails"></div></div>
+      <button id="continueBtn" class="btn btn-primary">Acceder a la red</button>
+    </section>
+
+    <section id="appView" class="app-layout hidden">
+      <aside class="sidebar">
+        <div class="side-profile"><div id="sideAvatar" class="avatar large">U</div><h3 id="sideName">Estudiante</h3><p id="sideCareer">Carrera</p></div>
+        <button class="side-link active" data-view="feedView">▦ &nbsp; Muro académico</button>
+        <button class="side-link" data-view="groupsView">◉ &nbsp; Grupos</button>
+        <button class="side-link" data-view="notificationsView">♧ &nbsp; Notificaciones <span id="sideNotificationBadge" class="notification-badge hidden">0</span></button>
+        <button class="side-link" data-view="messagesView">✉ &nbsp; Mensajes</button>
+        <button class="side-link" data-view="studentsView">♙ &nbsp; Estudiantes</button>
+        <button class="side-link" data-view="calendarView">▦ &nbsp; Calendario académico</button>
+        <button class="side-link" data-view="savedView">♡ &nbsp; Guardados</button>
+        <button class="side-link" data-view="historyView">↻ &nbsp; Historial</button>
+        <button class="side-link" data-view="profileView">♙ &nbsp; Mi perfil</button>
+        <button class="side-link admin-nav hidden" data-view="adminView">⚙ &nbsp; Panel administrativo</button>
+        <div class="sidebar-note"><b>Aprendemos juntos.</b><p>Una duda compartida puede convertirse en una gran idea.</p></div>
+      </aside>
+      <div class="content-area">
+        <section id="feedView" class="app-view">
+          <div class="page-heading"><div><span class="eyebrow">ESPACIO COLABORATIVO</span><h1>Muro académico</h1><p class="muted">Ideas, preguntas y recursos de tu comunidad.</p></div></div>
+          <section class="stories-panel card"><div class="stories-heading"><div><span class="eyebrow">MOMENTOS DEL CAMPUS</span><h2>Historias · 24 horas</h2></div><form id="storyForm" class="story-upload"><label for="storyPhoto" class="btn btn-outline">＋ Tu historia</label><input id="storyPhoto" type="file" accept="image/*" hidden></form></div><div id="storiesList" class="stories-list"></div></section>
+          <form id="postForm" class="composer card">
+            <div class="composer-top"><div id="composerAvatar" class="avatar">U</div><textarea id="postText" rows="3" maxlength="600" placeholder="¿Qué quieres compartir con la comunidad?"></textarea></div>
+            <div class="photo-picker"><label for="postPhoto">📸 Agregar una foto</label><input id="postPhoto" type="file" accept="image/*"><p class="muted photo-help">Puedes publicar texto, una foto o ambos. La imagen se ajustará para ocupar menos espacio.</p><div id="postPhotoPreview" class="photo-preview hidden"></div></div>
+            <div class="composer-bottom"><select id="postType" aria-label="Tipo de publicación"><option value="Publicación">💬 Publicación</option><option value="Duda">❓ Tengo una duda</option><option value="Recurso">📚 Recurso académico</option></select><button class="btn btn-primary" type="submit">＋ Publicar</button></div>
+          </form>
+          <div class="feed-tools"><h2>Publicaciones recientes</h2><div class="feed-controls"><input id="postSearch" type="search" placeholder="🔎 Buscar por texto o carrera..." aria-label="Buscar publicaciones"><select id="sortPosts" aria-label="Ordenar publicaciones"><option value="newest">Más recientes</option><option value="oldest">Más antiguas</option><option value="popular">Más populares</option></select><select id="feedFilter" aria-label="Filtrar publicaciones"><option value="Todas">Todas</option><option value="Publicación">Publicaciones</option><option value="Duda">Dudas</option><option value="Recurso">Recursos</option></select></div></div>
+          <div id="feedList" class="feed-list"></div>
+        </section>
+
+
+        <section id="notificationsView" class="app-view hidden">
+          <div class="page-heading"><div><span class="eyebrow">AL DÍA CON TU COMUNIDAD</span><h1>Notificaciones</h1><p class="muted">Me gusta, comentarios y nuevos seguidores.</p></div><button id="markNotificationsRead" class="btn btn-outline">Marcar como leídas</button></div>
+          <div id="notificationsList" class="card social-list"></div>
+        </section>
+        <section id="messagesView" class="app-view hidden">
+          <div class="page-heading"><div><span class="eyebrow">CONVERSACIONES</span><h1>Mensajes privados</h1><p class="muted">Conversa con otros estudiantes de CampusConecta.</p></div></div>
+          <div class="messages-layout card"><aside><input id="chatSearch" type="search" placeholder="Buscar estudiantes"><div id="chatContacts"></div></aside><div class="chat-panel"><div id="chatHeader" class="chat-header">Selecciona un estudiante para comenzar</div><div id="chatMessages" class="chat-messages"><div class="empty-state">Tus conversaciones aparecerán aquí.</div></div><form id="chatForm" class="chat-form"><input id="chatText" maxlength="600" placeholder="Escribe un mensaje..." autocomplete="off" required><button class="btn btn-primary" type="submit">Enviar</button></form></div></div>
+        </section>
+        <section id="studentsView" class="app-view hidden">
+          <div class="page-heading"><div><span class="eyebrow">CONECTA CON TU CAMPUS</span><h1>Descubrir estudiantes</h1><p class="muted">Encuentra personas por nombre, usuario o carrera y síguelas.</p></div></div>
+          <input id="studentSearch" class="wide-search" type="search" placeholder="Buscar estudiantes o carreras..."><div id="studentsList" class="students-grid"></div>
+        </section>
+        <section id="calendarView" class="app-view hidden">
+          <div class="page-heading"><div><span class="eyebrow">ORGANIZA TU SEMESTRE</span><h1>Calendario académico</h1><p class="muted">Guarda exámenes, entregas y actividades importantes.</p></div></div>
+          <form id="eventForm" class="card event-form"><h3>Agregar evento académico</h3><div class="event-fields"><input id="eventTitle" required maxlength="90" placeholder="Nombre del evento"><input id="eventDate" type="date" required><select id="eventType"><option>Examen</option><option>Entrega de tarea</option><option>Exposición</option><option>Actividad universitaria</option><option>Otro</option></select></div><textarea id="eventDescription" rows="2" maxlength="250" placeholder="Descripción (opcional)"></textarea><button class="btn btn-primary" type="submit">＋ Agregar al calendario</button></form>
+          <div class="calendar-section"><h2>Próximos eventos</h2><div id="calendarEvents" class="calendar-list"></div></div>
+        </section>
+        <section id="savedView" class="app-view hidden">
+          <div class="page-heading"><div><span class="eyebrow">TU COLECCIÓN PERSONAL ♡</span><h1>Publicaciones guardadas</h1><p class="muted">Guarda los apuntes y consejos que quieras encontrar después.</p></div></div>
+          <div id="savedList" class="feed-list"></div>
+        </section>
+
+        <section id="groupsView" class="app-view hidden">
+          <div class="page-heading"><div><span class="eyebrow">ENCUENTRA A TU GENTE</span><h1>Grupos de estudio</h1><p class="muted">Únete a un grupo para compartir información de tu carrera.</p></div></div>
+          <div id="groupsList" class="groups-grid"></div>
+        </section>
+
+        <section id="historyView" class="app-view hidden">
+          <div class="page-heading"><div><span class="eyebrow">TU ACTIVIDAD</span><h1>Mi historial</h1><p class="muted">Registro de tus publicaciones, reacciones y participación.</p></div><button id="downloadHistoryBtn" class="btn btn-outline">Descargar historial CSV</button></div>
+          <div class="card history-card"><div class="history-summary"><div><span id="historyCount" class="metric">0</span><span class="muted">interacciones registradas</span></div></div><div id="historyList"></div></div>
+        </section>
+
+        <section id="adminView" class="app-view hidden">
+          <div class="page-heading"><div><span class="eyebrow">CONTROL DE LA COMUNIDAD</span><h1>Panel administrativo</h1><p class="muted">Gestiona usuarios y contenido publicado.</p></div></div>
+          <div id="adminStats" class="admin-stats"></div>
+          <div class="card admin-card"><h2>Usuarios registrados</h2><div id="adminUsers"></div></div>
+          <div class="card admin-card"><h2>Publicaciones de la comunidad</h2><div id="adminPosts"></div></div>
+        </section>
+        <section id="profileView" class="app-view hidden">
+          <div class="page-heading"><div><span class="eyebrow">TU ESPACIO PERSONAL</span><h1>Mi perfil</h1><p class="muted">Mantén tu información universitaria actualizada.</p></div></div>
+          <form id="profileForm" class="card profile-form">
+            <div id="profileAvatar" class="avatar profile-avatar">U</div>
+            <label for="profilePhoto">Foto de perfil</label><input id="profilePhoto" type="file" accept="image/*"><p class="muted photo-help">Elige una foto para que aparezca junto a tu nombre en el muro y los grupos.</p><div id="profilePhotoPreview" class="photo-preview hidden"></div><button id="removeProfilePhoto" class="btn btn-outline" type="button">Quitar foto de perfil</button>
+            <label for="profileName">Nombre completo</label><input id="profileName" required maxlength="70">
+            <label for="profileEmail">Correo electrónico</label><input id="profileEmail" type="email" required>
+            <label for="profileCareer">Carrera</label><select id="profileCareer"><option>Administración</option><option>Ingeniería en Sistemas</option><option>Psicología</option><option>Derecho</option><option>Arquitectura</option><option>Otra</option></select>
+            <label for="profileBio">Descripción</label><textarea id="profileBio" rows="3" maxlength="180"></textarea>
+            <button class="btn btn-primary" type="submit">Guardar cambios</button><p id="profileMessage" class="form-message"></p>
+          </form>
+        </section>
+      </div>
+    </section>
+  </main>
+  <footer><span>© 2026 CampusConecta</span><span>Una comunidad para aprender y crecer.</span></footer>
+  <div id="toast" class="toast hidden" role="status"></div>
+  <script src="db-sync.js"></script>
+</body>
+</html>
